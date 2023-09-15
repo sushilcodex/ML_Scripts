@@ -1,0 +1,123 @@
+{% load static %}
+          
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Portfolio</title>
+        
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
+        {% comment %} <link href="{% static 'css/chat.css' %}" rel="stylesheet" /> {% endcomment %}
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="{% static 'js/custom.js' %}"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />
+
+        <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+        {% block extra_css %}
+    
+        {% endblock %}
+        {% block extra_js %}
+       
+        {% endblock %}
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            {% comment %} <a class="navbar-brand ps-3" href="/">Portfolio</a> {% endcomment %}
+            <a href="/"><img src="{% static 'logo.png' %}" alt="HTML tutorial" style="width:125px;height:52px;"></a>
+
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+    
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            {% comment %} <a class="nav-link" href="http://127.0.0.1:8050/" target="_blank">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Employee Attrition Dashboard
+                            </a> {% endcomment %}
+                            <a class="nav-link" href="{% url 'custom_object_detection' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-search"></i></div>
+                                Custom Object Detection
+                            </a>
+                            <a class="nav-link" href="{% url 'summarising' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                Summary
+                            </a>
+                            <a class="nav-link" href="{% url 'object_classification' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                                Object Classification
+                            </a>
+                            <a class="nav-link" href="{% url 'music_generation' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-music"></i></div>
+                                Music Generation
+                            </a>
+                            <a class="nav-link" href="{% url 'stock_prediction' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Stock Prediction
+                            </a>
+                            <a class="nav-link" href="{% url 'semantic_segmentation' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-search"></i></div>
+                                Semantic Segmentation
+                            </a>
+                            <a class="nav-link" href="{% url 'paraphrasing' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-paragraph"></i></div>
+                                Paraphrasing
+                            </a>
+                            <a class="nav-link" href="{% url 'chat_gpt' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-comment-alt"></i></div>
+                                Chat GPT
+                            </a>
+                          
+                            <a class="nav-link" href="{% url 'mcq' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-question-circle"></i></div>
+                                MCQ
+                            </a>
+                        </div>
+                    </div>
+               
+                </nav>
+            </div>
+
+{% block content %}
+
+
+{% endblock %}
+        
+</div>
+</main>
+<br><br>
+{% block footer %}
+<footer class="py-4 bg-light mt-auto">
+    
+</footer>
+{% endblock %}
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="{% static 'js/scripts.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+<script src="{% static 'js/datatables-simple-demo.js' %}"></script>
+
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,154 @@
+<style>
+    .error{
+    color:red;
+    }
+ </style>
+ {% extends "base.html" %}
+ {% load static %}
+ {% block extra_css %}
+ <link href="{% static 'css/chat.css' %}" rel="stylesheet" />
+ {% endblock %}
+ {% block content %}
+ <div id="layoutSidenav_content">
+    <main>
+       <div class="container-fluid px-4">
+          <h1 class="mt-4 heading-color">
+             ChatGPT
+          </h1>
+          <ol class="breadcrumb mb-4">
+          </ol>
+          <div class="card card box-shadow  mx-auto my-5 border-color" >
+             <h5 class="card-header heading-color">Description</h5>
+             <div class="card-body card-bg">
+                <h5 class="card-title">ChatGPT</h5>
+                <p class="card-text">ChatGPT behaves like an instructor, it takes on the role of a knowledgeable and informative guide. You can ask questions or provide prompts related to various subjects, and ChatGPT will respond with detailed explanations and instructions. It aims to provide helpful insights, step-by-step guidance, examples, and definitions to help you understand a particular concept or topic. 
+                   <br><br>
+                   <b><i>Input</i></b> - The input to ChatGPT as an instructor would be a question or a prompt related to a particular subject or topic.
+                   <br>
+                   <b><i>Output</i></b> - It would be a response that provides an explanation or instruction on the given topic.<br><br>
+                </p>
+             </div>
+          </div>
+          <!--start-->
+          <!-- chat-area -->
+          <section class="message-area">
+             <div class="container-fluid">
+                <div class="row">
+                  
+                   <div class="col-12">
+                     <div class="alert alert-primary d-none" id="alert_section" role="alert">
+                        Please renew your ChatGPT Key.
+                      </div>
+                      <div class="chat-area">
+                      
+                         <!-- chatbox -->
+                         <div class="chatbox">
+                            <div class="modal-dialog-scrollable">
+                              
+                               <div class="modal-content">
+                                  <div class="msg-head" style="background-color:#337E50">
+                                    
+                                     <div class="row">
+                                    
+                                        <div class="col-8">
+                                           <div class="d-flex align-items-center">
+                                              <div class="flex-grow-1 ms-3">
+                                                 <h3>AI Chat</h3>
+                                              </div>
+                                           </div>
+                                        </div>
+                                        <div class="col-4">
+                                        </div>
+                                     </div>
+                                  </div>
+                                  <div class="modal-body">
+                                     <div class="msg-body">
+                                        <ul id="chat_message">
+                                        </ul>
+                                     </div>
+                                  </div>
+                                  <div class="send-box">
+                                     <form id="Chat_form" class="align-items-start">
+                                        {% csrf_token %}
+                                        <div class="w-100">
+                                           <input type="text" id="user_input" name="message" class="form-control" aria-label="message…" placeholder="Write message…">
+                                        </div>
+                                        <button type="submit" class="chat_btn"><i class="fa fa-paper-plane " aria-hidden="true"></i> Send
+                                        <span class="spinner-border spinner-border-sm show_spinner d-none" role="status" aria-hidden="true"></span>
+                                        <span class="visually-hidden show_spinner">Loading...</span>
+                                        </button>
+                                     </form>
+                                     <div class="send-btns">    
+                                     </div>
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                      <!-- chatbox -->
+                   </div>
+                </div>
+             </div>
+       </div>
+       </section>
+       <!-- char-area -->
+       <!--end-->
+    </main>
+ </div>
+
+ <script>
+   function show_alert(){
+   $("#alert_section").removeClass('d-none');
+   }
+</script>
+
+
+
+ <script>
+    $('.chat_btn').click(function () {
+       $("#Chat_form").validate({
+           rules: {
+             
+             message: {
+                   required: true,
+               },
+           },
+           message: {
+             
+               name: {
+                   required: "This field is required.",
+               },
+           },
+           submitHandler: function (form) {
+               message = $("#Chat_form").find('#user_input').val()
+               $(".show_spinner").removeClass('d-none');
+
+               $.ajax({
+                   type: "POST",
+                   url: "/chat-gpt/",
+                   data: {
+                      message: message,
+                       csrfmiddlewaretoken: '{{ csrf_token }}',
+                   },
+                   success: function (data) {
+                      $("#user_input").val('')
+                      $("#user_input-error").removeClass("error");
+                      $(".show_spinner").addClass('d-none');
+                      var response= '<li class="sender"><p>'+data.response+'</p></li>'
+                      var sent_message= '<li class="repaly"><p>'+data.sender+'</p></li>'
+                      $('#chat_message').append(sent_message+response)
+    
+                   },
+                   error: function () {
+                     show_alert() 
+
+                   },
+
+               });
+           }
+    
+       });
+    
+    })
+ </script>
+ {% endblock %}
